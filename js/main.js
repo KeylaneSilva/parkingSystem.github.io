@@ -13,8 +13,25 @@ function cadastrarVeiculo(e){
         hora: time.getHours(),
         min: time.getMinutes()
     }
+
+    if(localStorage.getItem('patio2') === null){
+        var carros = []
+        carros.push(carro);
+        localStorage.setItem('patio2', JSON.stringify(carros));
+    }else{
+        var carros = JSON.parse(localStorage.getItem('patio'));
+        carro.push(carro);
+        localStorage.setItem('patio2', JSON.stringify(carros));
+    }
     
-    console.log(carro);
+    //localStorage.setItem("teste", "Dando tudo certo!"); //key => value
+    //console.log(localStorage.getItem("teste")); //"Dando tudo certo"
+    //localStorage.removeItem("teste");
+    //console.log(localStorage.getItem("teste"));
+
+
+
+    //console.log(carro);
 
     e.preventDefault(); //para a execução de um processo
 
