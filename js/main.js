@@ -6,6 +6,15 @@ function cadastrarVeiculo(e){
     var placaCarro = document.getElementById('placaVeiculo').value;
     var time = new Date();
 
+    //verificação nos campos
+    if(!modeloCarro || !placaCarro){
+        alert("Preencha os campos!!");
+        return false;
+    }
+
+    //limpando campos no formulario
+    document.getElementById('formulario').reset();
+
     carro = {
         modelo: modeloCarro,
         placa: placaCarro,
@@ -29,7 +38,21 @@ function cadastrarVeiculo(e){
     //console.log(localStorage.getItem("teste"));
     //console.log(carro);
     e.preventDefault(); //para a execução de um processo
+    mostrarPatio();
 
+}
+
+function apagarVeiculo(placa){
+    //console.log(placa);
+    var carros = JSON.parse(localStorage.getItem('patio2'));
+
+    for(var i = 0; i < carros.length; i++){
+        if(carros[i].placa == placa){
+            carros.splice(i, 1); //começando da posição i, remova um elemento
+        }
+        localStorage.setItem('patio2', JSON.stringify(carros));
+        mostrarPatio(); 
+    }
 }
 
 function mostrarPatio(){
@@ -48,6 +71,7 @@ function mostrarPatio(){
         carrosResultados.innerHTML += '<tr><td>' + modelo +
                                         '</td><td>' + placa +
                                         '</td><td>' + hora + ' : ' + minutos +
+                                        '</td><td> <button class= "btn btn-danger" onclick="apagarVeiculo(\'' + placa + '\')">Finalizar'
                                         '</td></tr>'; 
     }
 }
