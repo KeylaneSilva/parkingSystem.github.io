@@ -1,6 +1,5 @@
 document.getElementById('formulario').addEventListener('submit', cadastrarVeiculo);
 
-
 function cadastrarVeiculo(e){
     //console.log("Veiculo cadastrado com sucesso");
     var modeloCarro = document.getElementById('modeloCarro').value;
@@ -8,7 +7,7 @@ function cadastrarVeiculo(e){
     var time = new Date();
 
     carro = {
-        carro: modeloCarro,
+        modelo: modeloCarro,
         placa: placaCarro,
         hora: time.getHours(),
         minutos: time.getMinutes()
@@ -20,7 +19,7 @@ function cadastrarVeiculo(e){
         localStorage.setItem('patio2', JSON.stringify(carros));
     }else{
         var carros = JSON.parse(localStorage.getItem('patio2'));
-        carro.push(carro);
+        carros.push(carro);
         localStorage.setItem('patio2', JSON.stringify(carros));
     }
     
@@ -29,7 +28,6 @@ function cadastrarVeiculo(e){
     //localStorage.removeItem("teste");
     //console.log(localStorage.getItem("teste"));
     //console.log(carro);
-    mostrarPatio();
     e.preventDefault(); //para a execução de um processo
 
 }
