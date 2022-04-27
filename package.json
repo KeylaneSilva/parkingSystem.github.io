@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "jspdf": "^2.5.0",
+    "local-storage": "^2.0.0"
+  }
+}

@@ -19,8 +19,10 @@ function cadastrarVeiculo(e){
         modelo: modeloCarro,
         placa: placaCarro,
         hora: time.getHours(),
-        minutos: time.getMinutes()
+        minutos: time.getMinutes(),
+
     }
+    console.log(`${carro.hora}:${carro.minutos}`)
 
     if(localStorage.getItem('patio2') === null){
         var carros = []
@@ -31,7 +33,6 @@ function cadastrarVeiculo(e){
         carros.push(carro);
         localStorage.setItem('patio2', JSON.stringify(carros));
     }
-    
     //localStorage.setItem("teste", "Dando tudo certo!"); //key => value
     //console.log(localStorage.getItem("teste")); //"Dando tudo certo"
     //localStorage.removeItem("teste");
@@ -39,8 +40,9 @@ function cadastrarVeiculo(e){
     //console.log(carro);
     e.preventDefault(); //para a execução de um processo
     mostrarPatio();
-
 }
+
+
 
 function apagarVeiculo(placa){
     //console.log(placa);
@@ -51,7 +53,7 @@ function apagarVeiculo(placa){
             carros.splice(i, 1); //começando da posição i, remova um elemento
         }
         localStorage.setItem('patio2', JSON.stringify(carros));
-        mostrarPatio(); 
+        mostrarPatio();
     }
 }
 
@@ -67,11 +69,34 @@ function mostrarPatio(){
         var hora = carros[i].hora;
         var minutos = carros[i].minutos;
 
-        
         carrosResultados.innerHTML += '<tr><td>' + modelo +
                                         '</td><td>' + placa +
                                         '</td><td>' + hora + ' : ' + minutos +
-                                        '</td><td> <button class= "btn btn-danger" onclick="apagarVeiculo(\'' + placa + '\')">Finalizar'
-                                        '</td></tr>'; 
+                                        '</td><td id="horarioSaida">' +
+                                        '</td><td>' +
+                                        '</td><td> <button class= "btn btn-warning" onclick="finalizarVeiculo(\'' + placa + '\')">Finalizar' +
+                                        '</td><td> <button class= "btn btn-danger" onclick="apagarVeiculo(\'' + placa + '\')">Apagar'
+                                        '</td></tr>';
+    }
+}
+
+// ------------ FUNÇÃO TESTE --------------
+function finalizarVeiculo(placa){
+    var carros = JSON.parse(localStorage.getItem('patio2'));
+
+    for(let i=0;i< carros.length;i++){
+        if(carros[i].placa == placa){
+            let date = new Date()
+            console.log(`hora de entrada - ${carros[i].hora}: ${carros[i].minutos}`)
+            console.log(`hora de saida - ${date.getHours()}: ${date.getMinutes()}`)
+
+
+            var shora =  date.getHours() - carros[i].hora.getHours()
+            var sminuto = carros[i].minutos - date.getMinutes()
+            console.log(`${shora}:${sminuto}`)
+
+            //FAZER CALCULO DA HORA (4 HORAS )
+
+        }
     }
 }
